@@ -19,6 +19,7 @@ class CharPreprocessor(object):
 
         self.vocabulary = None
         self.inv_vocabulary = None
+        self.is_fitted = False
 
     @property
     def shape(self) -> Sequence[int]:
@@ -42,19 +43,13 @@ class CharPreprocessor(object):
 
         self.vocabulary = {char: i for i, (char, _) in enumerate(chars)}
         self.inv_vocabulary = {v: k for k, v in self.vocabulary.items()}
+        self.is_fitted = True
 
     def transform(self, data):
-        #input_texts = data[CONTENT_COL].astype(str)
-        #encoder_input, encoder_lengths = self.transform_texts(input_texts, adjust_left=True, reverse=False, start_token=False, end_token=False)
-        #
-        #if TITLE_COL in data.columns:
-        #    decoder_seq, decoder_lengths = self.transform_texts(data[TITLE_COL].astype(str), adjust_left=True, reverse=False, start_token=True, end_token=True)
-        #    decoder_input = decoder_seq[:,:-1] # Don't feed END token
-        #    decoder_targets = decoder_seq[:,1:] # Don't predict START token
-        #    return (encoder_input, encoder_lengths), (decoder_input, decoder_lengths - 1, decoder_targets)
-        #else:
-        #    return (encoder_input, encoder_lengths)
-        pass
+        decoder_seq, decoder_lengths = self.transform_texts(data[self.text_col].astype(str), adjust_left=True, reverse=False, start_token=False, end_token=True)
+        decoder_input = decoder_seq[:,:-1] # Don't feed END token
+        decoder_targets = decoder_seq[:,1:] # Don't predict START token
+        return (decoder_input, decoder_lengths - 1), decoder_targets
 
     def transform_texts(self, texts, adjust_left=False, reverse=False, start_token=None, end_token=None, padding_int=0):
         if start_token is None or not self.start_end_token: start_token = self.start_end_token
