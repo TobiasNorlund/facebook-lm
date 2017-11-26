@@ -4,6 +4,7 @@ if __name__ == "__main__":
     import argparse
     import sys
     import logging
+    import tensorflow as tf
 
     # Setup logging
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
@@ -16,6 +17,12 @@ if __name__ == "__main__":
     params = parser.parse_args()
 
     model = FriendChatBot(max_vocab_size=100, unk_token=False, save_dir=params.save_dir, text_col="message_chunk")
+
+    # Don't occupy any GPU during chatting
+    config = tf.ConfigProto(
+        device_count = {'GPU': 0}
+    )
+    model.session = tf.Session(config=config)
 
     # Load existing checkpoint is available
     if model.can_load():

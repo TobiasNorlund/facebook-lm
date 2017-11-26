@@ -156,10 +156,10 @@ class FriendChatBot(object):
                                                             })
 
                 # use some strategy to select next char
-                #selected = np.argmax(logits[i,:])
+                selected = np.argmax(logits[0,:])
 
-                probs = np.exp(logits[0,:] * 2) / np.sum(np.exp(logits[0,:] * 2))
-                selected = np.random.choice(np.arange(0, len(probs)), p=probs)
+                #probs = np.exp(logits[0,:] * 5) / np.sum(np.exp(logits[0,:] * 5))
+                #selected = np.random.choice(np.arange(0, len(probs)), p=probs)
 
                 if not selected in (self.preprocessor.vocabulary[preprocessing.END_TOKEN],
                                     self.preprocessor.vocabulary[data.ME_START_CHAR]):
@@ -175,6 +175,7 @@ class FriendChatBot(object):
                                                             self.decoder_c2: state_and_hidden[1].c,
                                                             self.decoder_h2: state_and_hidden[1].h,
                                                         })
+                    state_and_hidden = state_and_hidden[0]
                     break
             print("".join(friend_message))
             print()
