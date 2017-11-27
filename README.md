@@ -37,9 +37,8 @@ This usually takes some 10-15 minutes. When you get your email, download the dum
 ## 2. Inspect your data and generate training data
 
 The dump contains _all_ your data, including status updates, photos etc. We are only interested in the messages, which
-are contained in the ??? folder in HTML files.
-
-Fortuantely, there is a handy [python library](https://github.com/ownaginatious/fbchat-archive-parser) to parse these 
+are contained in the `html/messages.htm` page. The data comes in ugly HTML format but fortuantely, there is a handy 
+[python library](https://github.com/ownaginatious/fbchat-archive-parser) to parse these 
 files and extract the data into a better format.
 
 To collect some basic stats of your messaging history, lets run:
@@ -65,7 +64,10 @@ Top 10 longest threads:
   ...
 ```
 
-Now, pick a name you want to botify. In the example, we will take Mr. Karpathy. To generate a training file, run:
+Now, pick a name you want to botify. In the example, we will take Mr. Karpathy. Note that you can only pick
+a conversation with *two* parties, you and your friend, or else the script will fail.
+
+To generate a training file, run:
 
 ```
 root@1a2b3c4d5f6e:/# fbcap /data/html/messages.htm -t Karpathy -f json > /data/train-karpathy.json
@@ -73,3 +75,23 @@ root@1a2b3c4d5f6e:/# fbcap /data/html/messages.htm -t Karpathy -f json > /data/t
 
 ## 3. Train your model
 
+To train your bot model run the following:
+
+```
+$ make run DATA_DIR=/path/to/your/facebook-NAME
+root@1a2b3c4d5f6e:/# python train.py --train-data /data/train-karpathy.json --save-dir /data/
+```
+
+Training can take a long time, but after each epoch (full pass of your data) a checkpoint is saved. As soon as you
+get a checkpoint you can (while still training) try to chat with your model as described below.
+
+Once your training reaches losses < 1.0, the model start to generate somewhat language like text
+
+## 4. Chat using your model
+
+To start chatting with your trained model, run:
+
+```
+$ make run DATA_DIR=/path/to/your/facebook-NAME
+root@1a2b3c4d5f6e:/# python chat.py --save-dir /data/ --my-name "<MY NAME>" --friend-name "<FRIEND NAME>"
+```
