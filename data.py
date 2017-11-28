@@ -29,6 +29,3 @@ def load_from_json(file, chunk_length=10):
     df.sort_values(by="len", ascending=True, inplace=True)
     print("Num chunks: {}".format(len(df)))
     return df
-
-if __name__ == "__main__":
-    df = load_from_json("/data/jorun-train.json")
