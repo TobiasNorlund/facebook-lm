@@ -24,8 +24,8 @@ def load_from_json(file, chunk_length=10):
             current_chunk = []
 
     df = pd.DataFrame(chunks, columns=["message_chunk"])
-    df["len"] = df["message_chunk"].apply(lambda x: len(x))  # Process shorter articles first
-    df = df[df["len"] < 2000]  # Only process articles shorter than 2000 chars, otherwise memory blows up
+    df["len"] = df["message_chunk"].apply(lambda x: len(x))  # Process shorter chunks first
+    df = df[df["len"] < 2000]  # Only process chunks shorter than 2000 chars, otherwise memory blows up
     df.sort_values(by="len", ascending=True, inplace=True)
     print("Num chunks: {}".format(len(df)))
     return df

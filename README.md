@@ -79,7 +79,7 @@ To train your bot model run the following:
 
 ```
 $ make run DATA_DIR=/path/to/your/facebook-NAME
-root@1a2b3c4d5f6e:/# python train.py --train-data /data/train-karpathy.json --save-dir /data/
+root@1a2b3c4d5f6e:/# python /code/train.py --train-data /data/train-karpathy.json --save-dir /data/
 ```
 
 Training can take a long time, but after each epoch (full pass of your data) a checkpoint is saved. As soon as you
@@ -92,6 +92,6 @@ Once your training reaches losses < 1.0, the model start to generate somewhat la
 To start chatting with your trained model, run:
 
 ```
-$ make run DATA_DIR=/path/to/your/facebook-NAME
-root@1a2b3c4d5f6e:/# python chat.py --save-dir /data/ --my-name "<MY NAME>" --friend-name "<FRIEND NAME>"
+$ make run 
+root@1a2b3c4d5f6e:/# python /code/chat.py --save-dir /data/ --my-name "<MY NAME>" --friend-name "<FRIEND NAME>"
 ```

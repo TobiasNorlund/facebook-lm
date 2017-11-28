@@ -6,4 +6,4 @@ build:
 	docker build --rm -t facebook-lm .
 
 run:
-	docker run --rm -it -v $(DATA_DIR):/data facebook-lm bash
+	docker run --rm -it -v $(DATA_DIR):/data -v $(CURDIR):/code facebook-lm bash
