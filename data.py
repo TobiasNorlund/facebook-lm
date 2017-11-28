@@ -27,7 +27,7 @@ def load_from_json(file, chunk_length=10):
     df["len"] = df["message_chunk"].apply(lambda x: len(x))  # Process shorter articles first
     df = df[df["len"] < 2000]  # Only process articles shorter than 2000 chars, otherwise memory blows up
     df.sort_values(by="len", ascending=True, inplace=True)
-    print("Num articles: {}".format(len(df)))
+    print("Num chunks: {}".format(len(df)))
     return df
 
 if __name__ == "__main__":
