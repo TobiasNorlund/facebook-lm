@@ -85,6 +85,10 @@ root@1a2b3c4d5f6e:/# python /code/train.py --train-data /data/train-karpathy.jso
 Training can take a long time, but after each epoch (full pass of your data) a checkpoint is saved. As soon as you
 get a checkpoint you can (while still training) try to chat with your model as described below.
 
+The script will save the checkpoints at `DATA_DIR` and keep the 5 latest checkpoints saved and then delete the oldest
+on each new save. If you want the checkpoints to persist, you can at any time copy the content of `DATA_DIR` to another 
+location and point `DATA_DIR` to that location to recover.
+
 Once your training reaches losses < 1.0, the model start to generate somewhat language like text
 
 ## 4. Chat using your model
