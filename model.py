@@ -3,6 +3,7 @@ import preprocessing
 import logging
 from tqdm import trange
 import os
+import random
 import tensorflow as tf
 import numpy as np
 import re
@@ -12,6 +13,7 @@ from tensorflow.contrib.rnn import LSTMStateTuple
 
 MODEL_CHECKPOINT_NAME = "model.ckpt"
 MODEL_CHECKPOINT_REGEX = r"^model\.ckpt-(\d+)"
+
 
 class FriendChatBot(object):
 
@@ -114,10 +116,12 @@ class FriendChatBot(object):
         })
         tqdm.set_postfix(loss=loss)
 
-    def chat(self, my_name, friend_name):
+    def chat(self):
 
         state_and_hidden = self.session.run([self.rnn_cell.zero_state(1, dtype=tf.float32)])
         state_and_hidden = state_and_hidden[0]
+
+        my_name = data.USER_NAME_MAP[data.ME_START_CHAR]
 
         while True:
 
@@ -141,10 +145,14 @@ class FriendChatBot(object):
 
             # Friend talk
             print()
+
+            # Sample a user to generate message from (not myself)
+            friend_char, friend_name = random.choice(list(
+                {x: data.USER_NAME_MAP[x] for x in data.USER_NAME_MAP if x != data.ME_START_CHAR}.items()))
             print(friend_name)
 
             friend_message = []
-            next_input = np.array([[self.preprocessor.vocabulary[data.FRIEND_START_CHAR]]])
+            next_input = np.array([[self.preprocessor.vocabulary[friend_char]]])
             for t in range(150):
                 logits, state_and_hidden = self.session.run([self.decoder_proj_pred, self.decoder_states_pred],
                                                             feed_dict={

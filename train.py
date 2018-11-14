@@ -1,5 +1,5 @@
 from model import FriendChatBot
-from data import load_from_json
+from data import load_from_json, load_slack_data
 import logging
 
 if __name__ == "__main__":
@@ -16,7 +16,7 @@ if __name__ == "__main__":
     params = parser.parse_args()
 
     logging.info("Loading training data ...")
-    message_chunks = load_from_json(params.train_data)
+    message_chunks = load_slack_data(params.train_data)
 
     model = FriendChatBot(max_vocab_size=100, unk_token=False, save_dir=params.save_dir, text_col="message_chunk")
 
