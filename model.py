@@ -166,11 +166,11 @@ class FriendChatBot(object):
                 # use some strategy to select next char
 
                 # 1. Pick the char with highest probability
-                selected = np.argmax(logits[0,:])
+                #selected = np.argmax(logits[0,:])
 
                 # 2. Sample from character distribution
-                #probs = np.exp(logits[0,:] * 5) / np.sum(np.exp(logits[0,:] * 5))
-                #selected = np.random.choice(np.arange(0, len(probs)), p=probs)
+                probs = np.exp(logits[0,:] * 5) / np.sum(np.exp(logits[0,:] * 5))
+                selected = np.random.choice(np.arange(0, len(probs)), p=probs)
 
                 if not selected in (self.preprocessor.vocabulary[preprocessing.END_TOKEN],
                                     self.preprocessor.vocabulary[data.ME_START_CHAR]):

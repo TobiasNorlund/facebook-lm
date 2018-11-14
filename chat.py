@@ -12,8 +12,8 @@ if __name__ == "__main__":
     # Parse args
     parser = argparse.ArgumentParser("Chat using your trained chatbot model")
     parser.add_argument("--save-dir", dest="save_dir")
-    parser.add_argument("--my-name", dest="my_name")
-    parser.add_argument("--friend-name", dest="friend_name")
+    #parser.add_argument("--my-name", dest="my_name")
+    #parser.add_argument("--friend-name", dest="friend_name")
     params = parser.parse_args()
 
     model = FriendChatBot(max_vocab_size=100, unk_token=False, save_dir=params.save_dir, text_col="message_chunk")
@@ -31,4 +31,4 @@ if __name__ == "__main__":
         raise RuntimeError("Could not load a pretrained model from '{}'".format(params.save_dir))
 
     # Start chatting
-    model.chat(params.my_name, params.friend_name)
+    model.chat()
