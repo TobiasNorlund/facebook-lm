@@ -172,8 +172,8 @@ class FriendChatBot(object):
                 probs = np.exp(logits[0,:] * 5) / np.sum(np.exp(logits[0,:] * 5))
                 selected = np.random.choice(np.arange(0, len(probs)), p=probs)
 
-                if not selected in (self.preprocessor.vocabulary[preprocessing.END_TOKEN],
-                                    self.preprocessor.vocabulary[data.ME_START_CHAR]):
+                if not selected in [self.preprocessor.vocabulary[preprocessing.END_TOKEN]] + \
+                                   [self.preprocessor.vocabulary[char] for char in data.USER_NAME_MAP.keys()]:
                     friend_message.append(self.preprocessor.inv_vocabulary[selected])
                     next_input = np.array([[selected]])
                 else:

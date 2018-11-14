@@ -5,23 +5,23 @@ ME_START_CHAR = "\u001C"
 FRIEND_START_CHAR = "\u001D"
 
 USER_CHAR_MAP = {
-    "U0QLW8NF5": "\u001C", # Tobias
-    "U0C9CPXPF": "\u001D", # Samuel
-    "U096C2P3R": "\u001E", # Fredrik
-    "U4J26EJ8L": "\u001F", # Ruslan
-    "U3NJT3FU4": "\u0020", # Nuno
-    "U03JW9T8A": "\u0021", # Carl
-    "U51DGR3FH": "\u0022"  # Euan
+    "U0QLW8NF5": "\u001A", # Tobias
+    "U0C9CPXPF": "\u001B", # Samuel
+    "U096C2P3R": "\u001C", # Fredrik
+    "U4J26EJ8L": "\u001D", # Ruslan
+    "U3NJT3FU4": "\u001E", # Nuno
+    "U03JW9T8A": "\u001F", # Carl
+    "U51DGR3FH": "\u0019"  # Euan
 }
 
 USER_NAME_MAP = {
-    "\u001C": "Tobias", # Tobias
-    "\u001D": "Samuel", # Samuel
-    "\u001E": "Fredrik", # Fredrik
-    "\u001F": "Ruslan", # Ruslan
-    "\u0020": "Nuno", # Nuno
-    "\u0021": "Carl", # Carl
-    "\u0022": "Euan"  # Euan
+    "\u001A": "Tobias", # Tobias
+    "\u001B": "Samuel", # Samuel
+    "\u001C": "Fredrik", # Fredrik
+    "\u001D": "Ruslan", # Ruslan
+    "\u001E": "Nuno", # Nuno
+    "\u001F": "Carl", # Carl
+    "\u0019": "Euan"  # Euan
 }
 
 
