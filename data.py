@@ -1,7 +1,7 @@
 import json
 import pandas as pd
 
-ME_START_CHAR = "\u001C"
+ME_START_CHAR = "\u001A"
 FRIEND_START_CHAR = "\u001D"
 
 USER_CHAR_MAP = {
